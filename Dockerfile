@@ -13,6 +13,8 @@ RUN docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/i
     && docker-php-ext-install gd \
     && docker-php-ext-install zip
 RUN composer install --optimize-autoloader --no-dev
+RUN php artisan key:generate
+RUN php artisan config:clear
 
 RUN groupadd -g 1000 www
 RUN useradd -u 1000 -ms /bin/bash -g www www
